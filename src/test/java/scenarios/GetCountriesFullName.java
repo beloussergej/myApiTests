@@ -1,4 +1,4 @@
-package scenario;
+package scenarios;
 
 public class GetCountriesFullName {
 
