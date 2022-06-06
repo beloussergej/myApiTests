@@ -65,7 +65,6 @@ public class CountryWorker {
     }
 
     private static List<String> getSortListOfNames(List<String> names, boolean isAscendingOrder) {
-        List<String> filteredCountries = new ArrayList<>();
 
         if (isAscendingOrder) {
             Collections.sort(names);//приходить тру
@@ -113,12 +112,12 @@ public class CountryWorker {
     private static List<CountryDTO> getListOfCountriesByName(List<CountryDTO> allCountries, String name, boolean isFullMatch) {
         List<CountryDTO> filteredCountries = new ArrayList<>();
 
-        return (isFullMatch) ? getListOfCountriesNameEquals(allCountries, name) : getListOfCountriesNameContains(allCountries, name);
+        return isFullMatch ? getListOfCountriesNameEquals(allCountries, name) : getListOfCountriesNameContains(allCountries, name);
         //    Замість мого коментаря повинна бути реалізація
 //    Задача 6: знайди всі країни по назві назва(name).
 //    Користувач може вказувати, чи назва повинна дорівнювати знайденому слову, чи містити слово.
 //    Пошук повинен бути case insensitive - тобто буде працювати однаково для united, UNITED і United
-        //return filteredCountries;
+
     }
 
     private static List<CountryDTO> getListOfCountriesByLanguage(List<CountryDTO> allCountries, String language) {
