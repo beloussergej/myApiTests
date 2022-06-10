@@ -1,12 +1,10 @@
-package collectionsEducation;
-
-import org.apache.commons.lang3.StringUtils;
+package education;
 
 import java.util.*;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-public class CountryWorker {
+public class TasksWorker {
 
     public static void main(String[] args) {
         List<String> names = TestDataBuilder.getCountriesNamesList();
@@ -244,6 +242,62 @@ public class CountryWorker {
 //      Твоя задача створити один лист з двох листів, він повинен містити тільки унікальні значення(без дублікатів)
 //        Верни цей лист
         return new ArrayList<>();
+    }
+
+    private static void printMaxAndMin() {
+        int arrayLength = 50;
+        double[] arrayWithDouble = new double[arrayLength];
+        for (int i = 0; i < arrayWithDouble.length; i++) {
+            arrayWithDouble[i] = Math.random();
+        }
+//      Задача 21: знайди і надрукуй мінімальне і максимальне число в масиві. Для пошуку мін і макс колекції не використовуй
+    }
+
+    private static boolean isTextPalindrome(String text) {
+//      Задача 22: провірь чи текст являється паліндромомом.
+//      Колекції використовувати не можна
+//       протестуй на таких значенях:
+//       Saippuakivikauppias - true
+//       А роза упала на лапу Азора - true
+//       А роза упала на лапу Азор - false
+//       "1234321" - true
+//       "12344321" - true
+//       "123443212" - false
+        return false;
+    }
+
+    private static int getHowManyWordsInText(String text) {
+//      Задача 23: верни кількість слів в тексті
+//        Протестуй на будь-якому тексті
+        return 0;
+    }
+
+    private static int getHowManyTimesWordInText(String text, String word) {
+//      Задача 24: верни кількість скільки раз слово повторюється в тексті
+//        Протестуй на будь-якому тексті, де буде повторюватись слово
+        return 0;
+    }
+
+    private static double getFormattedDouble(double value) {
+//      Задача 25: округли double, щоб після коми було 2 значення(арифметично правильно)
+//        Протестуй на 0,125455, повинно бути 0,13
+//        Протестуй на 2,7845, повинно бути 2,79
+//        Протестуй на 3,65438, повинно бути 3,65
+        return 0;
+    }
+
+    private static int[] sortIntArray(int[] intArray) {
+//      Задача 26: відсортуй масив чисел
+//       протестуй на int[] arr = new int[]{43,6,12,87,0,34,3,1,1,1,564,456,4,3,6,5,14,64};
+        return intArray;
+    }
+
+    private static void printStringReverse(String text) {
+//      Задача 27: надрукуй стрінгу задом наперед
+    }
+
+    private static void printFibonacci(String text) {
+//      Задача 28: надрукуй перші 10 чисел Фібоначі
     }
 
 }
