@@ -10,6 +10,7 @@ public class TestDataBuilder {
     public static List<String> getCountriesNamesList() {
         return asList("United States of America", "united kingdom", "United Arab Emirates", "Mexico", "Spain",
                       "germany", "Italy", "Canada", "french");
+
     }
 
     public static List<CountryDTO> getCountriesList() {
