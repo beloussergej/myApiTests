@@ -60,7 +60,7 @@ public class TasksWorker {
         System.out.println();
         System.out.println("Задача 21 :");printMaxAndMin();
         System.out.println();
-        System.out.println("Задача 22 :" + isTextPalindrome("А роза упала на лапу Азора"));
+        System.out.println("Задача 22 :" + isTextPalindrome("12344321"));
         System.out.println();
         System.out.println("Задача 23 :кількість слів у тексті = " + getHowManyWordsInText("А роза упала на лапу Азора"));
         System.out.println();
@@ -364,34 +364,39 @@ public class TasksWorker {
             arrayWithDouble[i] = Math.random();
         }
         double minArray = arrayWithDouble[0];
-        for (int x = 1; x < arrayWithDouble.length; x++) {
-            if (arrayWithDouble[x] < minArray) {
-                minArray = arrayWithDouble[x];
+        for (int i = 1; i < arrayWithDouble.length; i++) {
+            if (arrayWithDouble[i] < minArray) {
+                minArray = arrayWithDouble[i];
             }
         }
         System.out.println("MIN arrayWithDouble : " + minArray );
 
         double maxArray = arrayWithDouble[0];
-        for (int y = 1; y < arrayWithDouble.length; y++) {
-            if(arrayWithDouble[y] > maxArray){
-                maxArray = arrayWithDouble[y];
+        for (int i = 1; i < arrayWithDouble.length; i++) {
+            if(arrayWithDouble[i] > maxArray){
+                maxArray = arrayWithDouble[i];
             }
         }
         System.out.println("MAX arrayWithDouble : " + maxArray );
 //      Задача 21: знайди і надрукуй мінімальне і максимальне число в масиві. Для пошуку мін і макс колекції не використовуй
     }
     private static boolean isTextPalindrome(String text) {
-        String myString = text.replaceAll(" ","");
-        StringBuffer buffer = new StringBuffer(myString);
-        buffer.reverse();
-        String myString2 = buffer.toString();
+        String myString = text.replaceAll(" ", "");
+        String[] line = myString.toLowerCase().split("");
 
-        if (myString.equalsIgnoreCase(myString2)) {
-            System.out.println("given string is palindrome");
-            return true;
+        for (int i = 0; i < line.length; i++) {
+            for (int j = line.length - 1; j >= 0; j--) {
+                if (line[i].equals(line[j])) {
+                    i++;
+                    continue;
+                }
+                System.out.println("given string is not palindrome");
+                return false;
+            }
         }
-        System.out.println("given string is not palindrome");
-        return false;
+        System.out.println("given string is palindrome");
+        return true;
+    }
 //      Задача 22: провірь чи текст являється паліндромомом.
 //      Колекції використовувати не можна
 //       протестуй на таких значенях:
@@ -401,16 +406,11 @@ public class TasksWorker {
 //       "1234321" - true
 //       "12344321" - true
 //       "123443212" - false
-    }
     private static int getHowManyWordsInText(String text) {
-
         int count = 0;
-
         if (text.length() != 0) {
             count++;
-
             for (int i = 0; i < text.length(); i++) {
-
                 if (text.charAt(i) == ' ') {
                     count++;
                 }
@@ -425,7 +425,6 @@ public class TasksWorker {
         int count = 0;
 
         for (int i = 0; i < string.length; i++) {
-
             if (string[i].equals(word)) {
                 count++;
             }
@@ -439,9 +438,9 @@ public class TasksWorker {
         String result = String.format("%.2f",value);
         String replaceSigns = result.replaceAll(",",".");
 
-        Double number = Double.parseDouble(replaceSigns);
+        Double parseDouble = Double.parseDouble(replaceSigns);
 
-        return number;
+        return parseDouble;
     }
 //      Задача 25: округли double, щоб після коми було 2 значення(арифметично правильно)
 //        Протестуй на 0,125455, повинно бути 0,13
@@ -456,13 +455,13 @@ public class TasksWorker {
         return intArray;
     }
     private static void printStringReverse(String text) {
-        String x = "";
+        String line = "";
         String[] word = text.split(" ");
 
         for (int i = word.length - 1; i >= 0; i--) {
-            x += word[i] + " ";
+            line += word[i] + " ";
         }
-        System.out.println(x);
+        System.out.println(line);
     }
 //      Задача 27: надрукуй стрінгу задом наперед
     private static void printFibonacci(int n) {
