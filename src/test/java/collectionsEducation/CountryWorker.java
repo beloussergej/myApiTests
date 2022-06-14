@@ -330,20 +330,15 @@ public class CountryWorker {
         return result;
     }
 }*/
-        Long l3 = System.nanoTime();
-        List<CountryDTO> result = new ArrayList<>();////другий спосіб - відпрацьовуе швидше
+        Long l3 = System.nanoTime();////другий спосіб - відпрацьовуе швидше
 
-        result.addAll(allCountries);
+        allCountries.addAll(allCountriesWithDuplicate);
 
-        for (CountryDTO country : allCountriesWithDuplicate) {
-            if (!result.contains(country)) {
-                result.add(country);
-            }
-        }
-        System.out.println(result.size());
+        System.out.println(allCountries.size());
         Long l4 = System.nanoTime();
         System.out.println(l4 - l3);
-        return result;
+
+        return getListOfCountriesWithoutDuplicate(allCountries);
 ////    Задача 20: для цієї задачі використовуй лист allCountries і allCountriesWithDuplicate
 //      Твоя задача створити один лист з двох листів, він повинен містити тільки унікальні значення(без дублікатів)
 //        Верни цей лист
