@@ -200,26 +200,23 @@ public class CountryWorker {
     private static boolean isListEmpty(List<CountryDTO> allCountriesWithDuplicate) throws Exception {
 
         if (allCountriesWithDuplicate == null) {
-            throw new Exception("List is null");
-
+            throw new RuntimeException("List is null");
         } else if (allCountriesWithDuplicate.isEmpty()) {
             System.out.println("list is empty");
             return true;
-
         } else {
             System.out.println("list is not empty");
             return false;
         }
+    }
 ////    Задача 10: для цієї задачі використовуй будь який лист
 //      Твоя задача в методі чи лист пустий чи ні. Він повинен працювати якщо ти передаси:
 //      не пустий лист, пустий лист, null замість ліста
-    }
-
     private static Integer getIndexOfName(List<String> names, String name) throws Exception {
         int index = names.indexOf(name);
 
         if (index < 0) {
-            throw new Exception("name is not found");
+            throw new IllegalArgumentException("name is not found");
         } else {
             return index;
         }
@@ -227,20 +224,17 @@ public class CountryWorker {
 ////    Задача 11: для цієї задачі використовуй names
 //      Твоя задача вернути індекс імени по введеному тексту, тобто якщо користувач введе імя Mexico, то ти вертаєш 3
 //      У випадку, якщо імя не знайдено, тоді викінь ексепшн з тестом, що імя не знайдено
-
     private static Integer getIndexOfCountry(List<CountryDTO> allCountries, String name) throws Exception {
 
         for (CountryDTO country : allCountries) {
-
             if (country.getName().equals(name)) {
                 return allCountries.indexOf(country);
             }
         }
-        throw new Exception("name is not found");
+        throw new IllegalArgumentException("name is not found");
     }
 ////    Задача 12: для цієї задачі використовуй allCountries
 //      Твоя задача вернути індекс країни по її імені, тобто якщо користувач введе імя Germany, то ти вертаєш 5
-
     private static List<String> getListWithReplacedName(List<String> names, String name) {
         String country = name.toLowerCase();
 
@@ -254,7 +248,6 @@ public class CountryWorker {
     }
 ////    Задача 13: для цієї задачі використовуй names
 //      Твоя задача замінити ім,я в листі, якщо воно написано з маленької букви
-
     private static List<String> getListWithReplacedName(List<String> names) {
 
         for (String country : names) {
@@ -264,7 +257,6 @@ public class CountryWorker {
     }
 ////    Задача 14: для цієї задачі використовуй names
 //      Твоя задача замінити всі імена в листі, які написані з маленької букви
-
     private static List<String> getUpdatedList(List<String> names, String name) {
         List<String> country = new ArrayList<>(names);
 
@@ -279,25 +271,19 @@ public class CountryWorker {
     }
 ////    Задача 15: для цієї задачі використовуй names
 //      В цьому методі треба добавити нове ім,я на початок листа
-
     private static void printAllNames(List<String> names) {
         int index = 1;
 
         for (String country : names) {
-
             System.out.println(String.format("Name on position %s is %s", index, country));
-
             index++;
         }
     }
 ////    Задача 16: для цієї задачі використовуй names
 //      Надрукуй всі елементи з нового рядка, текст повинен бути: "Name on position 1 is United States of America"
 //      Починай рахунок з 1, для форматування стрінги використай метод StringUtil.format() - погугли синтаксис
-
     private static List<CountryDTO> getListOfCountriesWithoutDuplicate(List<CountryDTO> allCountriesWithDuplicate) {
-        Set<CountryDTO> set = new HashSet<>();
-
-        set.addAll(allCountriesWithDuplicate);
+        Set<CountryDTO> set = new HashSet<>(allCountriesWithDuplicate);
 
         List<CountryDTO> list = new ArrayList<>(set);
 
@@ -306,31 +292,24 @@ public class CountryWorker {
 //    Задача 17: для цієї задачі використовуй лист allCountriesWithDuplicate
 //    Твоя задача вернути лист без дублікатів. Одного єдиного вирішення задачі немає, можеш написать кілька, які прийдуть в голову.
 //    Значення для ретурна заміни, я просто написала, щоб не ругався компілятор(це відноситься до всіх задач)
-
     private static String getCountriesNamesString(List<CountryDTO> allCountriesWithDuplicate) {
+        List<String> namesList = new ArrayList<>();
 
-        List<CountryDTO> list = getListOfCountriesWithoutDuplicate(allCountriesWithDuplicate);
-
-        List<String> sort = new ArrayList<>();
-
-        for (CountryDTO country : list) {
-            sort.add(country.getName());
+        for (CountryDTO country : getListOfCountriesWithoutDuplicate(allCountriesWithDuplicate)) {
+            namesList.add(country.getName());
         }
-        String text = String.join(";", sort);
-
+        String text = String.join(";", namesList);
         return text;
     }
 ////    Задача 18: для цієї задачі використовуй лист allCountriesWithDuplicate
 ////    Твоя задача вернути стрінгу, в якій містяться тільки назви всіх країн, без дублікатів, написані через кому:
 //       Italy,French,United Kingdom і тд
 //      В цій задачі використовуються і методи колекцій і методи стрінги
-
     private static List<CountryDTO> getListOfCountriesWithDeleted(List<CountryDTO> allCountries) {
-        List<CountryDTO> list = new ArrayList<>();
+        List<CountryDTO> list = new ArrayList<>(allCountries);
 
         for (CountryDTO country : allCountries) {
-
-            if (!country.isToDelete()) {
+            if (country.isToDelete()) {
                 list.remove(country);
             }
         }
@@ -338,32 +317,35 @@ public class CountryWorker {
     }
 ////    Задача 19: для цієї задачі використовуй лист allCountries
 //      Видали з листа всі країни, у яких значення поля toDelete=true, верни лист без ціх країн
-
     private static List<CountryDTO> getListOfTwoLists(List<CountryDTO> allCountries,
                                                       List<CountryDTO> allCountriesWithDuplicate) {
-     /*   Set<CountryDTO> set = new HashSet<>();  ////перший спосіб
+        /*Long l1 = System.nanoTime();
+        allCountries.addAll(allCountriesWithDuplicate);
+        Set<CountryDTO> set = new HashSet<>(allCountries); ////перший спосіб
 
-        set.addAll(allCountries);
-        set.addAll(allCountriesWithDuplicate);
+        List<CountryDTO> result = new ArrayList<>(set);
 
-        List<CountryDTO>result = new ArrayList<>(set);
+        Long l2 = System.nanoTime();
+        System.out.println(l2 - l1);
 
-        System.out.println(result.size());*/
+        return result;
+    }
+}*/
+        Long l3 = System.nanoTime();
+        List<CountryDTO> result = new ArrayList<>();////другий спосіб - відпрацьовуе швидше
 
-        List<CountryDTO> result = new ArrayList<>();  ////другий спосіб
         result.addAll(allCountries);
 
-        System.out.println(result.size());
-
         for (CountryDTO country : allCountriesWithDuplicate) {
-
             if (!result.contains(country)) {
                 result.add(country);
             }
         }
         System.out.println(result.size());
+        Long l4 = System.nanoTime();
+        System.out.println(l4 - l3);
         return result;
-        ////    Задача 20: для цієї задачі використовуй лист allCountries і allCountriesWithDuplicate
+////    Задача 20: для цієї задачі використовуй лист allCountries і allCountriesWithDuplicate
 //      Твоя задача створити один лист з двох листів, він повинен містити тільки унікальні значення(без дублікатів)
 //        Верни цей лист
     }
