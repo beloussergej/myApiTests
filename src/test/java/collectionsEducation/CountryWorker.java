@@ -274,8 +274,8 @@ public class CountryWorker {
     private static void printAllNames(List<String> names) {
         int index = 1;
 
-        for (String country : names) {
-            System.out.println(String.format("Name on position %s is %s", index, country));
+        for (int i = 0; i < names.size(); i++) {
+            System.out.println(String.format("Name on position %s is %s", index, names.get(i)));
             index++;
         }
     }
