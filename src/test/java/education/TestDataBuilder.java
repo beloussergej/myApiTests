@@ -1,4 +1,4 @@
-package collectionsEducation;
+package education;
 
 import java.util.ArrayList;
 import java.util.List;

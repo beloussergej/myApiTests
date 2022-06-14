@@ -1,4 +1,4 @@
-package collectionsEducation;
+package education;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
