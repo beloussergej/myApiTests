@@ -236,9 +236,8 @@ public class CountryWorker {
 ////    Задача 12: для цієї задачі використовуй allCountries
 //      Твоя задача вернути індекс країни по її імені, тобто якщо користувач введе імя Germany, то ти вертаєш 5
     private static List<String> getListWithReplacedName(List<String> names, String name) {
-        String country = name.toLowerCase();
 
-        int index = names.indexOf(country);
+        int index = names.indexOf(name.toLowerCase());
 
         if (index < 0) {
             return names;
