@@ -8,7 +8,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 public class CountryWorker {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         List<String> names = TestDataBuilder.getCountriesNamesList();
         List<CountryDTO> allCountries = TestDataBuilder.getCountriesList();
         List<CountryDTO> allCountriesWithDuplicate = TestDataBuilder.getCountriesListWithDuplicate();
@@ -35,6 +35,30 @@ public class CountryWorker {
         System.out.println("Задача8 :" + getListOfCountriesByLanguageMap(allCountries, "eng"));
         System.out.println();
         System.out.println("Задача9 :" + getListOfCountriesByLanguageMap(allCountries));
+        System.out.println();
+        System.out.println("Задача 10 :" + isListEmpty(allCountriesWithDuplicate));
+        System.out.println();
+        System.out.println("Задача 11 :" + getIndexOfName(names, "Mexico"));
+        System.out.println();
+        System.out.println("Задача 12 :" + getIndexOfCountry(allCountries, "Spain"));
+        System.out.println();
+        System.out.println("Задача 13 :" + getListWithReplacedName(names, "united kingdom"));
+        System.out.println();
+        System.out.println("Задача 14 :" + getListWithReplacedName(names));
+        System.out.println();
+        System.out.println("Задача 15 :" + getUpdatedList(names, "Ukraine"));
+        System.out.println();
+
+        printAllNames(names);//Задача 16
+
+        System.out.println();
+        System.out.println("Задача 17 :" + getListOfCountriesWithoutDuplicate(allCountriesWithDuplicate));
+        System.out.println();
+        System.out.println("Задача 18 :" + getCountriesNamesString(allCountriesWithDuplicate));
+        System.out.println();
+        System.out.println("Задача 19 :" + getListOfCountriesWithDeleted(allCountries));
+        System.out.println();
+        System.out.println("Задача 20 :" + getListOfTwoLists(allCountries, allCountriesWithDuplicate));
     }
 
     private static List<String> getListOfNamesEquals(List<String> names, String name) {
@@ -46,7 +70,7 @@ public class CountryWorker {
                 filteredCountries.add(country);
             }
         }
-        //    Замість мого коментаря повинна бути реалізація
+//    Замість мого коментаря повинна бути реалізація
 //    Задача 1: знайди всі імена, які містить введене значення, наприклад united.
 //    Пошук повинен бути case insensitive - тобто буде працювати однаково для united, UNITED і United
 
@@ -62,7 +86,7 @@ public class CountryWorker {
             }
             break;
         }
-        //    Замість мого коментаря повинна бути реалізація
+//    Замість мого коментаря повинна бути реалізація
 //    Задача 2: знайди перше ім'я, які містить введене значення, наприклад united.
 //    Пошук повинен бути case insensitive - тобто буде працювати однаково для united, UNITED і United
         return filteredCountry;
@@ -75,7 +99,7 @@ public class CountryWorker {
         } else {
             Collections.sort(names, Collections.reverseOrder());//приходить фолс
         }
-        //    Замість мого коментаря повинна бути реалізація
+//    Замість мого коментаря повинна бути реалізація
 //    Задача 3: відсортіруй імена в алфавітному порядку,
 //    в залежності від значення isAscendingOrder сортуй або від А-Я, або Я-А
 //    Сортування теж Case insensitive
@@ -91,7 +115,7 @@ public class CountryWorker {
                 filteredCountries.add(country);
             }
         }
-        //    Замість мого коментаря повинна бути реалізація
+//    Замість мого коментаря повинна бути реалізація
 //    Задача 4: знайди всі країни в яких назва(name) дорівнює введеному значенню, наприклад italy.
 //    Пошук повинен бути case insensitive - тобто буде працювати однаково для italy, ITALY і Italy
         return filteredCountries;
@@ -106,19 +130,19 @@ public class CountryWorker {
                 filteredCountries.add(country);
             }
         }
-        //    Замість мого коментаря повинна бути реалізація
+//    Замість мого коментаря повинна бути реалізація
 //    Задача 5: знайди всі країни в яких назва(name) містить введене значення, наприклад united.
 //    Пошук повинен бути case insensitive - тобто буде працювати однаково для united, UNITED і United
         return filteredCountries;
     }
 
     private static List<CountryDTO> getListOfCountriesByName(List<CountryDTO> allCountries, String name,
-            boolean isFullMatch) {
+                                                             boolean isFullMatch) {
         List<CountryDTO> filteredCountries = new ArrayList<>();
 
         return isFullMatch ? getListOfCountriesNameEquals(allCountries, name) :
                 getListOfCountriesNameContains(allCountries, name);
-        //    Замість мого коментаря повинна бути реалізація
+//    Замість мого коментаря повинна бути реалізація
 //    Задача 6: знайди всі країни по назві назва(name).
 //    Користувач може вказувати, чи назва повинна дорівнювати знайденому слову, чи містити слово.
 //    Пошук повинен бути case insensitive - тобто буде працювати однаково для united, UNITED і United
@@ -141,14 +165,14 @@ public class CountryWorker {
     }
 
     private static Map<String, List<CountryDTO>> getListOfCountriesByLanguageMap(List<CountryDTO> allCountries,
-            String language) {
+                                                                                 String language) {
         Map<String, List<CountryDTO>> filteredCountriesMap = new HashMap<>();
         List<String> languages = Arrays.asList("ENG", "SPA", "FRA");
 
         for (String lang : languages) {
             filteredCountriesMap.put(lang, getListOfCountriesByLanguage(allCountries, lang));
         }
-        //    Замість мого коментаря повинна бути реалізація
+//    Замість мого коментаря повинна бути реалізація
 //    Задача 8: створи мапу, ключ в якої буда мова, а значеня - це лист країн, в якої мова дорівнює мові з ключа.
 //     Використовуй метод getListOfCountriesByLanguage для кожного елементу в листі languages
         return filteredCountriesMap;
@@ -166,84 +190,157 @@ public class CountryWorker {
         for (CountryDTO country : allCountries) {
             country.setLanguage(languages.get(country.getLanguage()));
         }
-        //    Замість мого коментаря повинна бути реалізація
+//    Замість мого коментаря повинна бути реалізація
 //    Задача 9: пройдись по всьому листу і заміни коротку назву мови на довгу("ENG" на "English")
 //    Для нових назв вікористовуй мапу languages
 //    верни лист уже з новими значеннями для мови
         return allCountries;
     }
 
-    private static boolean isListEmpty(List<Object> list) {
+    private static boolean isListEmpty(List<CountryDTO> allCountriesWithDuplicate) throws Exception {
+
+        if (allCountriesWithDuplicate == null) {
+            throw new RuntimeException("List is null");
+        } else if (allCountriesWithDuplicate.isEmpty()) {
+            System.out.println("list is empty");
+            return true;
+        } else {
+            System.out.println("list is not empty");
+            return false;
+        }
+    }
 ////    Задача 10: для цієї задачі використовуй будь який лист
 //      Твоя задача в методі чи лист пустий чи ні. Він повинен працювати якщо ти передаси:
 //      не пустий лист, пустий лист, null замість ліста
-        return false;
-    }
+    private static Integer getIndexOfName(List<String> names, String name) throws Exception {
+        int index = names.indexOf(name);
 
-    private static Integer getIndexOfName(List<String> names, String name) {
+        if (index < 0) {
+            throw new IllegalArgumentException("name is not found");
+        } else {
+            return index;
+        }
+    }
 ////    Задача 11: для цієї задачі використовуй names
 //      Твоя задача вернути індекс імени по введеному тексту, тобто якщо користувач введе імя Mexico, то ти вертаєш 3
 //      У випадку, якщо імя не знайдено, тоді викінь ексепшн з тестом, що імя не знайдено
-        return 0;
-    }
+    private static Integer getIndexOfCountry(List<CountryDTO> allCountries, String name) throws Exception {
 
-    private static Integer getIndexOfCountry(List<CountryDTO> allCountries, String name) {
+        for (CountryDTO country : allCountries) {
+            if (country.getName().equals(name)) {
+                return allCountries.indexOf(country);
+            }
+        }
+        throw new IllegalArgumentException("name is not found");
+    }
 ////    Задача 12: для цієї задачі використовуй allCountries
 //      Твоя задача вернути індекс країни по її імені, тобто якщо користувач введе імя Germany, то ти вертаєш 5
-        return 0;
-    }
-
     private static List<String> getListWithReplacedName(List<String> names, String name) {
+
+        int index = names.indexOf(name.toLowerCase());
+
+        if (index < 0) {
+            return names;
+        }
+        names.set(index, names.get(index).toUpperCase());
+        return names;
+    }
 ////    Задача 13: для цієї задачі використовуй names
 //      Твоя задача замінити ім,я в листі, якщо воно написано з маленької букви
+    private static List<String> getListWithReplacedName(List<String> names) {
+
+        for (String country : names) {
+            getListWithReplacedName(names, country);
+        }
         return names;
     }
-
-    private static List<String> getListWithReplacedName(List<String> names) {
 ////    Задача 14: для цієї задачі використовуй names
 //      Твоя задача замінити всі імена в листі, які написані з маленької букви
-        return names;
-    }
-
     private static List<String> getUpdatedList(List<String> names, String name) {
+        List<String> country = new ArrayList<>(names);
+
+        int index = names.indexOf(name);
+
+        if (index < 0) {
+            System.out.println(country.size());
+            country.add(0, name);
+            System.out.println(country.size());
+        }
+        return country;
+    }
 ////    Задача 15: для цієї задачі використовуй names
 //      В цьому методі треба добавити нове ім,я на початок листа
-        return names;
-    }
-
     private static void printAllNames(List<String> names) {
+        int index = 1;
+
+        for (int i = 0; i < names.size(); i++) {
+            System.out.println(String.format("Name on position %s is %s", index, names.get(i)));
+            index++;
+        }
+    }
 ////    Задача 16: для цієї задачі використовуй names
 //      Надрукуй всі елементи з нового рядка, текст повинен бути: "Name on position 1 is United States of America"
 //      Починай рахунок з 1, для форматування стрінги використай метод StringUtil.format() - погугли синтаксис
-    }
+    private static List<CountryDTO> getListOfCountriesWithoutDuplicate(List<CountryDTO> allCountriesWithDuplicate) {
+        Set<CountryDTO> set = new HashSet<>(allCountriesWithDuplicate);
 
-    private static List<CountryDTO> getListOfCountriesWithoutDuplicate(List<CountryDTO> allCountries) {
+        List<CountryDTO> list = new ArrayList<>(set);
+
+        return list;
+    }
 //    Задача 17: для цієї задачі використовуй лист allCountriesWithDuplicate
 //    Твоя задача вернути лист без дублікатів. Одного єдиного вирішення задачі немає, можеш написать кілька, які прийдуть в голову.
 //    Значення для ретурна заміни, я просто написала, щоб не ругався компілятор(це відноситься до всіх задач)
-        return new ArrayList<>();
-    }
+    private static String getCountriesNamesString(List<CountryDTO> allCountriesWithDuplicate) {
+        List<String> namesList = new ArrayList<>();
 
-    private static String getCountriesNamesString(List<CountryDTO> allCountries) {
+        for (CountryDTO country : getListOfCountriesWithoutDuplicate(allCountriesWithDuplicate)) {
+            namesList.add(country.getName());
+        }
+        String text = String.join(";", namesList);
+        return text;
+    }
 ////    Задача 18: для цієї задачі використовуй лист allCountriesWithDuplicate
 ////    Твоя задача вернути стрінгу, в якій містяться тільки назви всіх країн, без дублікатів, написані через кому:
 //       Italy,French,United Kingdom і тд
 //      В цій задачі використовуються і методи колекцій і методи стрінги
-        return EMPTY;
-    }
-
     private static List<CountryDTO> getListOfCountriesWithDeleted(List<CountryDTO> allCountries) {
+        List<CountryDTO> list = new ArrayList<>(allCountries);
+
+        for (CountryDTO country : allCountries) {
+            if (country.isToDelete()) {
+                list.remove(country);
+            }
+        }
+        return list;
+    }
 ////    Задача 19: для цієї задачі використовуй лист allCountries
 //      Видали з листа всі країни, у яких значення поля toDelete=true, верни лист без ціх країн
-        return new ArrayList<>();
-    }
+    private static List<CountryDTO> getListOfTwoLists(List<CountryDTO> allCountries,
+                                                      List<CountryDTO> allCountriesWithDuplicate) {
+        /*Long l1 = System.nanoTime();
+        allCountries.addAll(allCountriesWithDuplicate);
+        Set<CountryDTO> set = new HashSet<>(allCountries); ////перший спосіб
 
-    private static List<CountryDTO> getListOfTwoLists(List<CountryDTO> firstCountriesList,
-            List<CountryDTO> secondCountriesList) {
+        List<CountryDTO> result = new ArrayList<>(set);
+
+        Long l2 = System.nanoTime();
+        System.out.println(l2 - l1);
+
+        return result;
+    }
+}*/
+        Long l3 = System.nanoTime();////другий спосіб - відпрацьовуе швидше
+
+        allCountries.addAll(allCountriesWithDuplicate);
+
+        System.out.println(allCountries.size());
+        Long l4 = System.nanoTime();
+        System.out.println(l4 - l3);
+
+        return getListOfCountriesWithoutDuplicate(allCountries);
 ////    Задача 20: для цієї задачі використовуй лист allCountries і allCountriesWithDuplicate
 //      Твоя задача створити один лист з двох листів, він повинен містити тільки унікальні значення(без дублікатів)
 //        Верни цей лист
-        return new ArrayList<>();
     }
-
 }
