@@ -62,7 +62,7 @@ public class TasksWorker {
         System.out.println();
         System.out.println("Задача 22 :" + isTextPalindrome("12344321"));
         System.out.println();
-        System.out.println("Задача 23 :кількість слів у тексті = " + getHowManyWordsInText("А роза упала на лапу Азора"));
+        System.out.println("Задача 23 :кількість слів у тексті = " + getHowManyWordsInText("А роза упала на лапа Азора"));
         System.out.println();
         System.out.println("Задача 24 :" + getHowManyTimesWordInText("футбол мяф футбол судья футбол игра поле","футбол"));
         System.out.println();
@@ -364,19 +364,15 @@ public class TasksWorker {
             arrayWithDouble[i] = Math.random();
         }
         double minArray = arrayWithDouble[0];
+        double maxArray = arrayWithDouble[0];
         for (int i = 1; i < arrayWithDouble.length; i++) {
             if (arrayWithDouble[i] < minArray) {
                 minArray = arrayWithDouble[i];
-            }
-        }
-        System.out.println("MIN arrayWithDouble : " + minArray );
-
-        double maxArray = arrayWithDouble[0];
-        for (int i = 1; i < arrayWithDouble.length; i++) {
-            if(arrayWithDouble[i] > maxArray){
+            }else if(arrayWithDouble[i] > maxArray){
                 maxArray = arrayWithDouble[i];
             }
         }
+        System.out.println("MIN arrayWithDouble : " + minArray );
         System.out.println("MAX arrayWithDouble : " + maxArray );
 //      Задача 21: знайди і надрукуй мінімальне і максимальне число в масиві. Для пошуку мін і макс колекції не використовуй
     }
@@ -407,13 +403,11 @@ public class TasksWorker {
 //       "12344321" - true
 //       "123443212" - false
     private static int getHowManyWordsInText(String text) {
+        String[] str = text.split(" ");
         int count = 0;
-        if (text.length() != 0) {
-            count++;
-            for (int i = 0; i < text.length(); i++) {
-                if (text.charAt(i) == ' ') {
-                    count++;
-                }
+        for (int i = 0; i < str.length; i++) {
+            if(!str[i].equals("-")){
+                count++;
             }
         }
         return count;
@@ -425,7 +419,7 @@ public class TasksWorker {
         int count = 0;
 
         for (int i = 0; i < string.length; i++) {
-            if (string[i].equals(word)) {
+            if (string[i].equalsIgnoreCase(word)) {
                 count++;
             }
         }
@@ -448,8 +442,19 @@ public class TasksWorker {
 //        Протестуй на 3,65438, повинно бути 3,65
     private static int[] sortIntArray(int[] intArray) {
 
-        System.out.print("sorted array :");
-        Arrays.sort(intArray);
+            for (int i = intArray.length - 1; i > 0; i--) {
+
+                for (int j = 0; j < i; j++) {
+
+                    if(intArray[j] > intArray[j + 1]){
+                        int tmp = intArray[j];
+                        intArray[j] = intArray[j + 1];
+                        intArray[j +1] = tmp;
+
+                    }
+
+                }
+            }
 //      Задача 26: відсортуй масив чисел
 //       протестуй на int[] arr = new int[]{43,6,12,87,0,34,3,1,1,1,564,456,4,3,6,5,14,64};
         return intArray;
