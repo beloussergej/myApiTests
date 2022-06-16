@@ -10,6 +10,7 @@ public class TasksWorker {
         List<String> names = TestDataBuilder.getCountriesNamesList();
         List<CountryDTO> allCountries = TestDataBuilder.getCountriesList();
         List<CountryDTO> allCountriesWithDuplicate = TestDataBuilder.getCountriesListWithDuplicate();
+        Locale.setDefault(new Locale("en","GB"));
 //        тут будеш визивать потрібний метот
         System.out.print("LIST COUNTRY :");
         for (String test : names) {
@@ -62,7 +63,7 @@ public class TasksWorker {
         System.out.println();
         System.out.println("Задача 22 :" + isTextPalindrome("12344321"));
         System.out.println();
-        System.out.println("Задача 23 :кількість слів у тексті = " + getHowManyWordsInText("А роза упала на лапа Азора"));
+        System.out.println("Задача 23 :кількість слів у тексті = " + getHowManyWordsInText("        А роза - упала на лапу Азора "));
         System.out.println();
         System.out.println("Задача 24 :" + getHowManyTimesWordInText("футбол мяф футбол судья футбол игра поле","футбол"));
         System.out.println();
@@ -406,12 +407,17 @@ public class TasksWorker {
         String[] str = text.split(" ");
         int count = 0;
         for (int i = 0; i < str.length; i++) {
-            if(!str[i].equals("-")){
+            if(str[i].equals("")){
+                continue;
+            }else  if(str[i].equals("-")){
+                continue;
+            }else {
                 count++;
             }
         }
-        return count;
-    }
+            return count;
+        }
+
 //      Задача 23: верни кількість слів в тексті
 //        Протестуй на будь-якому тексті
     private static int getHowManyTimesWordInText(String text, String word) {
@@ -430,9 +436,8 @@ public class TasksWorker {
     private static double getFormattedDouble(double value) {
 
         String result = String.format("%.2f",value);
-        String replaceSigns = result.replaceAll(",",".");
-
-        Double parseDouble = Double.parseDouble(replaceSigns);
+        System.out.println(Locale.getDefault());
+        Double parseDouble = Double.parseDouble(result);
 
         return parseDouble;
     }
