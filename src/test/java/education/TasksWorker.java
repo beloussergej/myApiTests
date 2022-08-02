@@ -10,6 +10,7 @@ public class TasksWorker {
         List<String> names = TestDataBuilder.getCountriesNamesList();
         List<CountryDTO> allCountries = TestDataBuilder.getCountriesList();
         List<CountryDTO> allCountriesWithDuplicate = TestDataBuilder.getCountriesListWithDuplicate();
+        Locale.setDefault(new Locale("en","GB"));
 //        тут будеш визивать потрібний метот
         System.out.print("LIST COUNTRY :");
         for (String test : names) {
@@ -57,6 +58,22 @@ public class TasksWorker {
         System.out.println("Задача 19 :" + getListOfCountriesWithDeleted(allCountries));
         System.out.println();
         System.out.println("Задача 20 :" + getListOfTwoLists(allCountries, allCountriesWithDuplicate));
+        System.out.println();
+        System.out.println("Задача 21 :");printMaxAndMin();
+        System.out.println();
+        System.out.println("Задача 22 :" + isTextPalindrome("12344321"));
+        System.out.println();
+        System.out.println("Задача 23 :кількість слів у тексті = " + getHowManyWordsInText("        А роза - упала на лапу Азора "));
+        System.out.println();
+        System.out.println("Задача 24 :" + getHowManyTimesWordInText("футбол мяф футбол судья футбол игра поле","футбол"));
+        System.out.println();
+        System.out.println("Задача 25 :" + getFormattedDouble(2.7854));
+        System.out.println();
+        System.out.println("Задача 26 :" + Arrays.toString(sortIntArray(new int[]{43,6,12,87,0,34,3,1,1,1,564,456,4,3,6,5,14,64})));
+        System.out.println();
+        System.out.print("Задача 27 :");printStringReverse("Добрий вечір ми із України");
+        System.out.println();
+        System.out.print("Задача 28 :");printFibonacci(10);
     }
 
     private static List<String> getListOfNamesEquals(List<String> names, String name) {
@@ -341,17 +358,42 @@ public class TasksWorker {
 //      Твоя задача створити один лист з двох листів, він повинен містити тільки унікальні значення(без дублікатів)
 //        Верни цей лист
     }
-
     private static void printMaxAndMin() {
         int arrayLength = 50;
         double[] arrayWithDouble = new double[arrayLength];
         for (int i = 0; i < arrayWithDouble.length; i++) {
             arrayWithDouble[i] = Math.random();
         }
+        double minArray = arrayWithDouble[0];
+        double maxArray = arrayWithDouble[0];
+        for (int i = 1; i < arrayWithDouble.length; i++) {
+            if (arrayWithDouble[i] < minArray) {
+                minArray = arrayWithDouble[i];
+            }else if(arrayWithDouble[i] > maxArray){
+                maxArray = arrayWithDouble[i];
+            }
+        }
+        System.out.println("MIN arrayWithDouble : " + minArray );
+        System.out.println("MAX arrayWithDouble : " + maxArray );
 //      Задача 21: знайди і надрукуй мінімальне і максимальне число в масиві. Для пошуку мін і макс колекції не використовуй
     }
-
     private static boolean isTextPalindrome(String text) {
+        String myString = text.replaceAll(" ", "");
+        String[] line = myString.toLowerCase().split("");
+
+        for (int i = 0; i < line.length; i++) {
+            for (int j = line.length - 1; j >= 0; j--) {
+                if (line[i].equals(line[j])) {
+                    i++;
+                    continue;
+                }
+                System.out.println("given string is not palindrome");
+                return false;
+            }
+        }
+        System.out.println("given string is palindrome");
+        return true;
+    }
 //      Задача 22: провірь чи текст являється паліндромомом.
 //      Колекції використовувати не можна
 //       протестуй на таких значенях:
@@ -361,40 +403,88 @@ public class TasksWorker {
 //       "1234321" - true
 //       "12344321" - true
 //       "123443212" - false
-        return false;
-    }
-
     private static int getHowManyWordsInText(String text) {
+        String[] str = text.split(" ");
+        int count = 0;
+        for (int i = 0; i < str.length; i++) {
+            if(str[i].equals("")){
+                continue;
+            }else  if(str[i].equals("-")){
+                continue;
+            }else {
+                count++;
+            }
+        }
+            return count;
+        }
+
 //      Задача 23: верни кількість слів в тексті
 //        Протестуй на будь-якому тексті
-        return 0;
-    }
-
     private static int getHowManyTimesWordInText(String text, String word) {
+        String[] string = text.split(" ");
+        int count = 0;
+
+        for (int i = 0; i < string.length; i++) {
+            if (string[i].equalsIgnoreCase(word)) {
+                count++;
+            }
+        }
+        return count;
+    }
 //      Задача 24: верни кількість скільки раз слово повторюється в тексті
 //        Протестуй на будь-якому тексті, де буде повторюватись слово
-        return 0;
-    }
-
     private static double getFormattedDouble(double value) {
+
+        String result = String.format("%.2f",value);
+        System.out.println(Locale.getDefault());
+        Double parseDouble = Double.parseDouble(result);
+
+        return parseDouble;
+    }
 //      Задача 25: округли double, щоб після коми було 2 значення(арифметично правильно)
 //        Протестуй на 0,125455, повинно бути 0,13
 //        Протестуй на 2,7854, повинно бути 2,79
 //        Протестуй на 3,65438, повинно бути 3,65
-        return 0;
-    }
-
     private static int[] sortIntArray(int[] intArray) {
+
+            for (int i = intArray.length - 1; i > 0; i--) {
+
+                for (int j = 0; j < i; j++) {
+
+                    if(intArray[j] > intArray[j + 1]){
+                        int tmp = intArray[j];
+                        intArray[j] = intArray[j + 1];
+                        intArray[j +1] = tmp;
+
+                    }
+
+                }
+            }
 //      Задача 26: відсортуй масив чисел
 //       протестуй на int[] arr = new int[]{43,6,12,87,0,34,3,1,1,1,564,456,4,3,6,5,14,64};
         return intArray;
     }
-
     private static void printStringReverse(String text) {
-//      Задача 27: надрукуй стрінгу задом наперед
-    }
+        String line = "";
+        String[] word = text.split(" ");
 
-    private static void printFibonacci(String text) {
+        for (int i = word.length - 1; i >= 0; i--) {
+            line += word[i] + " ";
+        }
+        System.out.println(line);
+    }
+//      Задача 27: надрукуй стрінгу задом наперед
+    private static void printFibonacci(int n) {
+        int[] arr = new int[n];
+        arr[0] = 0;
+        arr[1] = 1;
+
+        for (int i = 2; i < arr.length; ++i) {
+            arr[i] = arr[i - 1] + arr[i - 2];
+        }
+        for (int i = 0; i < arr.length; ++i) {
+            System.out.print(arr[i] + ", ");
+        }
 //      Задача 28: надрукуй перші 10 чисел Фібоначі
     }
 
